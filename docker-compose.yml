@@ -33,7 +33,7 @@ services:
       ACTUAL_FILE_PASSWORD: ${ACTUAL_FILE_PASSWORD}
 
       OLLAMA_URL: http://ollama:11434
-      OLLAMA_MODEL: qwen2.5:7b
+      OLLAMA_MODEL: mistral
 
       PORT: 8787
       API_TOKEN: ${API_TOKEN}
