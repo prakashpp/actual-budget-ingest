@@ -82,6 +82,7 @@ Health check (no auth required).
 
 | Variable | Description |
 |----------|-------------|
-| `ACTUAL_PASSWORD` | Actual Budget password |
+| `ACTUAL_PASSWORD` | Actual Budget server password |
 | `ACTUAL_BUDGET_ID` | Budget ID from Actual |
+| `ACTUAL_FILE_PASSWORD` | Budget file encryption password (if E2E encryption enabled) |
 | `API_TOKEN` | Token for API authentication |

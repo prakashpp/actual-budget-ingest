@@ -19,6 +19,7 @@ const {
   ACTUAL_SERVER_URL,
   ACTUAL_PASSWORD,
   ACTUAL_BUDGET_ID,
+  ACTUAL_FILE_PASSWORD,
   OLLAMA_URL,
   OLLAMA_MODEL = "mistral",
   PORT = "8787",
@@ -306,7 +307,7 @@ async function ensureActualReady() {
       password: ACTUAL_PASSWORD,
     });
 
-    await downloadBudget(ACTUAL_BUDGET_ID);
+    await downloadBudget(ACTUAL_BUDGET_ID, { password: ACTUAL_FILE_PASSWORD });
 
     const accounts = await getAccounts();
     actualAccounts = accounts.filter((a) => !a.closed);
