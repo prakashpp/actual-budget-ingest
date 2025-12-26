@@ -1,0 +1,9 @@
+{
+    "name": "sms-ingest",
+    "version": "1.0.0",
+    "type": "module",
+    "dependencies": {
+      "@actual-app/api": "^25.0.0",
+      "express": "^4.19.2"
+    }
+  }

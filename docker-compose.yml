@@ -1,0 +1,46 @@
+services:
+  actual:
+    image: actualbudget/actual-server:latest
+    container_name: actual
+    restart: unless-stopped
+    volumes:
+      - actual-data:/data
+    ports:
+      - "5006:5006"   # expose Actual UI to tailnet/host
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    volumes:
+      - ollama-data:/root/.ollama
+    environment:
+      OLLAMA_KEEP_ALIVE: "24h"  # Keep model loaded in memory
+    expose:
+      - "11434"  # Run: docker exec -it ollama ollama pull mistral
+
+  api:
+    build: ./api
+    container_name: api
+    restart: unless-stopped
+    depends_on:
+      - actual
+      - ollama
+    environment:
+      ACTUAL_SERVER_URL: http://actual:5006
+      ACTUAL_PASSWORD: ${ACTUAL_PASSWORD}
+      ACTUAL_BUDGET_ID: ${ACTUAL_BUDGET_ID}
+
+      OLLAMA_URL: http://ollama:11434
+      OLLAMA_MODEL: qwen2.5:7b
+
+      PORT: 8787
+      API_TOKEN: ${API_TOKEN}
+      TIMEZONE: "Asia/Kolkata"
+      IMPORT_NOTES_PREFIX: "SMS"
+    ports:
+      - "8787:8787"
+
+volumes:
+  actual-data:
+  ollama-data:
